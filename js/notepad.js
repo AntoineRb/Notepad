@@ -1,3 +1,6 @@
+let userNotes  = new Map();
+let actualNoteid = userNotes.size;
+
 const notePadContainer = document.querySelector( '.notepad-container' );
 
 // Aside
@@ -16,10 +19,41 @@ const title         = noteContainer.querySelector('header').querySelector('h1');
 const textArea      = noteContainer.querySelector('.user-note-input');
 
 const dialogTitle   = noteContainer.querySelector('.modal-choose-title');
+const dialogForm    = dialogTitle.querySelector('form');
 
 // Change the visibility of the textarea
 // textArea.style.display = 'none';
 
+
+function getLocalDate() {
+  let actualDate = new Date();
+  let localDate  = actualDate.toLocaleString( navigator.language, {
+
+    weekday: 'long',
+    year:    'numeric',
+    month:   'long',
+    day:     'numeric',
+    hour:    'numeric',
+    minute:  'numeric',
+    second:  'numeric' 
+  });
+
+  return localDate;
+}
+
+function setNewNote( title, note = '') {
+  const localDate = getLocalDate();
+  const id        = userNotes.size;
+  actualNoteid    = id;
+
+  console.log(id);
+
+  userNotes.set( id ,{
+    noteTitle: title,
+    userNote: note,
+    creationDate: localDate
+  })
+}
 
 
 function showModal( yStart, yEnd, durationTime = 600 ) {
@@ -41,12 +75,35 @@ btnAdd.addEventListener('click', (e) => {
   showModal('-600px', '0px');     
 });
 
-// Il faut ajouter les instructions pour sauvegarder les valeurs
-dialogTitle.addEventListener('submit', (e) => {
+function addElementToList( noteId, noteTitle, noteDate ) {
+  const newElement = document.createElement('li');
+  const heading    = document.createElement('h2');
+  const caption    = document.createElement('p');
   
+  newElement.id = noteId;
+
+  heading.className   = "list-title";
+  heading.textContent = noteTitle;
+
+  caption.className   = "caption";
+  caption.textContent = noteDate; 
+
+  newElement.appendChild( heading, caption );
+  noteList.appendChild( newElement );
+}
+
+
+// add instructions to save values
+dialogForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  showModal('0px', '-600px');
+
+  const titleInput = dialogForm.querySelector('input').value;
+  title.textContent = titleInput;
+  setNewNote( titleInput );
+  let a = userNotes.get(0)['creationDate'];
+  console.log(a);
   
+  showModal('0px', '-600px');
 });
 dialogTitle.querySelector('.btn-abort').addEventListener('click', () => {
 

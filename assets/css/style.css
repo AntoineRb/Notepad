@@ -64,12 +64,12 @@ body ::-webkit-scrollbar {
   transition-duration: 500ms;
   cursor: pointer;
 }
-.notepad-container .note-list-block .note-list li p {
+.notepad-container .note-list-block .note-list li p, .notepad-container .note-list-block .note-list li h2 {
   color: #cdd9e5;
   text-align: center;
   font-family: "Rubik", sans-serif;
 }
-.notepad-container .note-list-block .note-list li .description {
+.notepad-container .note-list-block .note-list li .list-title {
   font-size: 2em;
 }
 .notepad-container .note-list-block .note-list li .caption {
