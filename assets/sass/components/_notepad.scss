@@ -1,0 +1,194 @@
+
+.notepad-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    
+    .note-list-block {
+        width: 30%;
+        height: 100vh;
+        background-color: #2d333b;
+        border-right: 1px double #474e57;
+        position: relative;
+
+        .list-top-bar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            background-color: #0a66c2;
+            width: 100%;
+            height: 70px;
+            // height: 5vh;
+            position: absolute;
+
+            button {
+                border: none;
+                background: none;
+                color: #cdd9e5;
+                cursor: pointer;
+
+                span{
+                    font-size: 3em;
+                    transition-duration: 500ms;
+                }
+                span:hover{
+                    color: #acb6c0;
+                }
+            }
+            .btn-delete:hover{
+                span{
+                    color: #dc3545;
+                }   
+            }
+        }
+        
+        .note-list {
+            max-height: 94.5vh;
+            margin-top: 75px;
+            overflow: scroll;
+            li {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                background-color: #0a66c2;
+                margin-bottom: 5px;
+                transition-duration: 500ms;
+                cursor: pointer;
+                p {
+                    color: #cdd9e5;       
+                    text-align: center;
+                    font-family: 'Rubik', sans-serif;
+                }
+                .description {
+                    font-size: 2em;
+                }
+                .caption {
+                    font-size: 1em;
+                    font-weight: lighter;
+                }
+            }
+            li:hover {
+                background-color: #075eb4;
+            }
+            
+        }
+        
+    }
+    .note-container { 
+        width: 70%;
+        height: 100vh;
+        background-color: #2d333b;
+
+        header {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            height: 70px;
+            background-color: #0a66c2;
+
+            margin-bottom: 0.5vh;
+
+            h1 {
+                text-align: center;
+                font-size: 3em;
+                color: #cdd9e5;
+                font-family: 'Rubik', sans-serif;
+                letter-spacing: 1.5px;
+                padding-top: 5px;
+            }
+            
+        }
+
+        .modal-choose-title{
+            position: relative;
+            z-index: 0;
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 0.5%;
+            font-size: 1.5rem;
+            text-align: center;
+            
+            border: none;
+            border-radius: 0.5em;
+            background-color: #545d68;
+            color: #cdd9e5;
+
+            padding-top: 5px;
+
+            left: 33%;
+            top: -600px;
+
+            transition-duration: 500ms;         // for modal
+
+            label{
+                color: #ecf6ff;
+                font-family: 'Rubik', sans-serif;
+                font-weight: bold;
+
+            }
+
+            form {
+                input{
+                width: 95%;
+                height: 35px;
+                margin-top: 5px;
+                border: none;
+                outline: none;
+                text-align: center;
+                font-size: 1em;
+            }
+            .dialog-btn-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                button{
+                    width: 40%;             
+                    border: none;
+                    font-size: 0.8em;
+                    color: #ecf6ff;
+                    margin-top: 5px;
+                    padding: 4px;
+                    transition-duration: 400ms;
+                    cursor: pointer;
+                }
+                .btn-continue {
+                    background-color: #28A745;
+                }
+                .btn-continue:hover {
+                    background-color: #2fc752;
+                }
+                .btn-abort {
+                    background-color:  #dc3545;
+                }
+                .btn-abort:hover {
+                    background-color:  #f13b4d;
+                }
+    
+                }
+            }
+            
+            
+        }
+        .user-note-input{
+            width: 96%;
+            height: 94vh;
+            border:none;
+            background-image:none;
+            background-color:transparent;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+            color: #cdd9e5;
+            font-size: 2em;
+            padding-left: 1em;
+            font-family: 'Rubik', sans-serif;
+            
+        }
+    }
+
+}
