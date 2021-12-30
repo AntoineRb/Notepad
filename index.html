@@ -16,6 +16,13 @@
 
             <aside class="note-list-block">
                 <div class="list-top-bar">
+                    <button class="btn-delete">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                        <p class="btn-caption">delete</p>
+                    </button> 
+
                     <button class="btn-add">
                         <span class="material-icons">
                             note_add
@@ -29,31 +36,10 @@
                         </span>
                         <p class="btn-caption">edit</p>
                     </button>
-
-                    <button class="btn-delete">
-                        <span class="material-icons">
-                            delete
-                        </span>
-                        <p class="btn-caption">delete</p>
-                    </button> 
-                    <button class="btn-save">
-                        <span class="material-icons">
-                            save
-                        </span>
-                        <p>save</p>
-                    </button>
                 </div>
 
                 <ul class="note-list">
-                    <li>
-                        <h2 class="list-title">Faire des courses pour le nouvel an</h2>
-                        <p class="caption">Ajouter le 24/12/2021</p>
-                    </li> 
-                    <li>
-                        <h2 class="list-title">Faire des courses pour le nouvel an</h2>
-                        <p class="caption">Ajouter le 24/12/2021</p>
-                    </li> 
-                    
+                   
                 </ul>
                 
             </aside>
@@ -66,23 +52,21 @@
                 <dialog class="modal-choose-title" open>
                     
                     <form>
-                        <label for="title">Saisir l'intitulé de la nouvelle note :</label>
+                        <label for="title"></label>
                         <input type="text" id="title" name="title">
                         <div class="dialog-btn-container">
                             <button class="btn-continue" type="submit">
-                                Valider
+                                Continue
                             </button>
                             <button class="btn-abort">
-                                Annuler
+                                Abort
                             </button>
                         </div>
                     </form>
 
                 </dialog>
 
-                <textarea class="user-note-input">
-
-                </textarea>
+                <textarea class="user-note-input" placeholder="Click Here..."></textarea>
             </article>
         </section>
     </main>

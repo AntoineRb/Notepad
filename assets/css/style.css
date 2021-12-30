@@ -175,5 +175,20 @@ body ::-webkit-scrollbar {
   padding-left: 1em;
   font-family: "Rubik", sans-serif;
 }
+.notepad-container .note-container ::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #cdd9e5;
+  text-align: center;
+  opacity: 1;
+  /* Firefox */
+}
+.notepad-container .note-container :-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #cdd9e5;
+}
+.notepad-container .note-container ::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #cdd9e5;
+}
 
 /*# sourceMappingURL=style.css.map */

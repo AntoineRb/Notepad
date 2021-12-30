@@ -1,5 +1,6 @@
 let userNotes  = new Map();
-let actualNoteid = userNotes.size;
+let nbOfNotes    = 0;
+let actualNoteid = 0;
 
 const notePadContainer = document.querySelector( '.notepad-container' );
 
@@ -11,18 +12,17 @@ const listTopBar       = noteListSection.querySelector( '.list-top-bar' );
 const btnAdd    = listTopBar.querySelector( '.btn-add'  );
 const btnEdit   = listTopBar.querySelector( '.btn-edit' );
 const btnDelete = listTopBar.querySelector( '.btn-delete' );
-const btnSave   = listTopBar.querySelector( '.btn-save' );
 
 // Article
 const noteContainer = notePadContainer.querySelector( '.note-container' );
 const title         = noteContainer.querySelector('header').querySelector('h1');
-const textArea      = noteContainer.querySelector('.user-note-input');
+const userNoteInput = noteContainer.querySelector('.user-note-input');
 
 const dialogTitle   = noteContainer.querySelector('.modal-choose-title');
 const dialogForm    = dialogTitle.querySelector('form');
 
 // Change the visibility of the textarea
-// textArea.style.display = 'none';
+userNoteInput.style.display = 'none';
 
 
 function getLocalDate() {
@@ -43,8 +43,9 @@ function getLocalDate() {
 
 function setNewNote( title, note = '') {
   const localDate = getLocalDate();
-  const id        = userNotes.size;
-  actualNoteid    = id;
+  nbOfNotes++;
+  const id        = nbOfNotes;
+  actualNoteid    = nbOfNotes;
 
   console.log(id);
 
@@ -53,8 +54,10 @@ function setNewNote( title, note = '') {
     userNote: note,
     creationDate: localDate
   })
-}
 
+  // console.log(userNotes.get(id));
+  
+}
 
 function showModal( yStart, yEnd, durationTime = 600 ) {
     dialogTitle.animate([
@@ -64,23 +67,18 @@ function showModal( yStart, yEnd, durationTime = 600 ) {
       ], {
         // timing options
         duration: durationTime,
-        iterations: 1
+        // iterations: 1
         
       });
       dialogTitle.style.top = yEnd;
 }
-
-//btn Add event
-btnAdd.addEventListener('click', (e) => {
-  showModal('-600px', '0px');     
-});
 
 function addElementToList( noteId, noteTitle, noteDate ) {
   const newElement = document.createElement('li');
   const heading    = document.createElement('h2');
   const caption    = document.createElement('p');
   
-  newElement.id = noteId;
+  newElement.id = `note${noteId}`;
 
   heading.className   = "list-title";
   heading.textContent = noteTitle;
@@ -88,25 +86,110 @@ function addElementToList( noteId, noteTitle, noteDate ) {
   caption.className   = "caption";
   caption.textContent = noteDate; 
 
-  newElement.appendChild( heading, caption );
-  noteList.appendChild( newElement );
+  newElement.append( heading, caption );
+  noteList.prepend( newElement );
 }
 
+function removeNote( id ) {
+  //Next Feature
+}
+
+function openNote( id ) {
+  actualNoteid        = id;
+  title.textContent   = userNotes.get(actualNoteid)['noteTitle'];
+  userNoteInput.value = userNotes.get(actualNoteid)['userNote'];
+}
+
+//btn Add event
+btnAdd.addEventListener('click', (e) => {
+
+  dialogForm.querySelector('label').textContent = 'Set a title :';
+  dialogTitle.id = 'set-title'; // To know if the event set a title or event update a title
+
+  showModal('-600px', '0px');     
+});
 
 // add instructions to save values
 dialogForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const titleInput = dialogForm.querySelector('input').value;
-  title.textContent = titleInput;
-  setNewNote( titleInput );
-  let a = userNotes.get(0)['creationDate'];
-  console.log(a);
-  
+  const titleInput  = dialogForm.querySelector('input').value;
+  let dialogId      = dialogTitle.id;
+
+  if ( dialogId == 'update-title' &&  titleInput.length > 0) { // Update title
+
+    console.log( 'Log event Dialog, Actual ID : ' + actualNoteid);
+    const targetElement = document.querySelector(`#note${actualNoteid}`);
+    const titleToChange = targetElement.querySelector('.list-title');
+
+    userNotes.set( actualNoteid, {
+      noteTitle: titleInput
+    });
+
+    title.textContent   = titleInput;
+    titleToChange.textContent = titleInput;
+
+    dialogForm.querySelector('input').value = '';
+    showModal('0px', '-600px');
+
+    console.log( 'After Log event Dialog, Actual ID : ' + actualNoteid);
+    console.log(userNotes.get(actualNoteid)['noteTitle']);
+  }
+
+
+  if ( dialogId == 'set-title' && titleInput.length > 0) {
+    title.textContent = titleInput;
+
+    setNewNote( titleInput );
+    addElementToList( actualNoteid , titleInput, getLocalDate() );
+    showModal('0px', '-600px');
+
+    dialogForm.querySelector('input').value = '';
+
+    userNoteInput.style.display = '';
+  } 
+});
+
+dialogTitle.querySelector('.btn-abort').addEventListener('click', () => {
   showModal('0px', '-600px');
 });
-dialogTitle.querySelector('.btn-abort').addEventListener('click', () => {
 
-  showModal('0px', '-600px');
+noteList.addEventListener( 'click', (e) => {
+
+  if ( e.target.nodeName == 'LI' ) {
+
+    openNote( Number( e.target.id.replace('note', '') ) );
+
+  } else if ( e.target.parentElement.nodeName == 'LI' ) {
+
+    openNote( Number( e.target.parentElement.id.replace('note', '') ) );
+  }
+  console.log( 'Log event note list Actual ID : ' + actualNoteid);
+});
+
+userNoteInput.addEventListener('keyup', (e) => {
+  
+  userNotes.set( actualNoteid, {
+    userNote: userNoteInput.value
+  })
+
+});
+
+userNoteInput.addEventListener('keydown', (e) => {
+  let code = e.keyCode || e.which;
+  
+  if ( code === 9 ) { // Tab keypress event
+    e.preventDefault()
+    userNoteInput.value += '   ';
+  }
+});
+
+btnEdit.addEventListener( 'click', () => {
+
+  if ( !(actualNoteid == 0) ) {
+    dialogForm.querySelector('label').textContent = 'Set a new title :';
+    dialogTitle.id = 'update-title';
+    showModal('-600px', '0px');
+  }
 });
 
