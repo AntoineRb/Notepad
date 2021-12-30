@@ -1,6 +1,6 @@
-let userNotes  = new Map();
+let userNotes    = new Map();
 let nbOfNotes    = 0;
-let actualNoteid = 0;
+let actualNoteId = 0;
 
 const notePadContainer = document.querySelector( '.notepad-container' );
 
@@ -45,7 +45,7 @@ function setNewNote( title, note = '') {
   const localDate = getLocalDate();
   nbOfNotes++;
   const id        = nbOfNotes;
-  actualNoteid    = nbOfNotes;
+  actualNoteId    = nbOfNotes;
 
   console.log(id);
 
@@ -91,13 +91,26 @@ function addElementToList( noteId, noteTitle, noteDate ) {
 }
 
 function removeNote( id ) {
-  //Next Feature
+
+  const titleToRemove = userNotes.get( actualNoteId )['noteTitle'];
+  const userAnswer = confirm(`Are you sure to delete this note ?\n'${titleToRemove}'`);
+
+  if ( userAnswer ) {
+
+    nbOfNotes--;
+    userNotes.delete(id);
+    noteList.querySelector(`#note${id}`).remove();
+    title.textContent = 'MemoryPad';
+    userNoteInput.style.display = 'none';
+    console.log(typeof( actualNoteId ));
+    
+  }
 }
 
 function openNote( id ) {
-  actualNoteid        = id;
-  title.textContent   = userNotes.get(actualNoteid)['noteTitle'];
-  userNoteInput.value = userNotes.get(actualNoteid)['userNote'];
+  actualNoteId        = id;
+  title.textContent   = userNotes.get(actualNoteId)['noteTitle'];
+  userNoteInput.value = userNotes.get(actualNoteId)['userNote'];
 }
 
 //btn Add event
@@ -118,11 +131,11 @@ dialogForm.addEventListener('submit', (e) => {
 
   if ( dialogId == 'update-title' &&  titleInput.length > 0) { // Update title
 
-    console.log( 'Log event Dialog, Actual ID : ' + actualNoteid);
-    const targetElement = document.querySelector(`#note${actualNoteid}`);
+    console.log( 'Log event Dialog, Actual ID : ' + actualNoteId);
+    const targetElement = document.querySelector(`#note${actualNoteId}`);
     const titleToChange = targetElement.querySelector('.list-title');
 
-    userNotes.set( actualNoteid, {
+    userNotes.set( actualNoteId, {
       noteTitle: titleInput
     });
 
@@ -132,8 +145,10 @@ dialogForm.addEventListener('submit', (e) => {
     dialogForm.querySelector('input').value = '';
     showModal('0px', '-600px');
 
-    console.log( 'After Log event Dialog, Actual ID : ' + actualNoteid);
-    console.log(userNotes.get(actualNoteid)['noteTitle']);
+    console.log( 'After Log event Dialog, Actual ID : ' + actualNoteId);
+    console.log(userNotes.get(actualNoteId)['noteTitle']);
+
+    e.preventDefault();
   }
 
 
@@ -141,7 +156,7 @@ dialogForm.addEventListener('submit', (e) => {
     title.textContent = titleInput;
 
     setNewNote( titleInput );
-    addElementToList( actualNoteid , titleInput, getLocalDate() );
+    addElementToList( actualNoteId , titleInput, getLocalDate() );
     showModal('0px', '-600px');
 
     dialogForm.querySelector('input').value = '';
@@ -150,7 +165,7 @@ dialogForm.addEventListener('submit', (e) => {
   } 
 });
 
-dialogTitle.querySelector('.btn-abort').addEventListener('click', () => {
+dialogTitle.querySelector('.btn-cancel').addEventListener('click', () => {
   showModal('0px', '-600px');
 });
 
@@ -159,17 +174,19 @@ noteList.addEventListener( 'click', (e) => {
   if ( e.target.nodeName == 'LI' ) {
 
     openNote( Number( e.target.id.replace('note', '') ) );
+    userNoteInput.style.display = '';
 
   } else if ( e.target.parentElement.nodeName == 'LI' ) {
 
     openNote( Number( e.target.parentElement.id.replace('note', '') ) );
+    userNoteInput.style.display = '';
   }
-  console.log( 'Log event note list Actual ID : ' + actualNoteid);
+  console.log( 'Log event note list Actual ID : ' + actualNoteId);
 });
 
 userNoteInput.addEventListener('keyup', (e) => {
   
-  userNotes.set( actualNoteid, {
+  userNotes.set( actualNoteId, {
     userNote: userNoteInput.value
   })
 
@@ -186,10 +203,13 @@ userNoteInput.addEventListener('keydown', (e) => {
 
 btnEdit.addEventListener( 'click', () => {
 
-  if ( !(actualNoteid == 0) ) {
+  if ( !(nbOfNotes == 0) ) {
     dialogForm.querySelector('label').textContent = 'Set a new title :';
     dialogTitle.id = 'update-title';
     showModal('-600px', '0px');
   }
 });
 
+btnDelete.addEventListener( 'click', () => {
+  removeNote( actualNoteId );
+});

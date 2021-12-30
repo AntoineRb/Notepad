@@ -154,10 +154,10 @@ body ::-webkit-scrollbar {
 .notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-continue:hover {
   background-color: #2fc752;
 }
-.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-abort {
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-cancel {
   background-color: #dc3545;
 }
-.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-abort:hover {
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-cancel:hover {
   background-color: #f13b4d;
 }
 .notepad-container .note-container .user-note-input {
