@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Memory Pad</title>
+</head>
+<body>
+    <main>
+        <section class="notepad-container">
+
+            <aside class="note-list-block">
+                <div class="list-top-bar">
+                    <button class="btn-delete">
+                        <span class="material-icons">
+                            delete
+                        </span>
+                        <p class="btn-caption">delete</p>
+                    </button> 
+
+                    <button class="btn-add">
+                        <span class="material-icons">
+                            note_add
+                        </span>
+                        <p class="btn-caption">new</p>
+                    </button>
+
+                    <button class="btn-edit">
+                        <span class="material-icons">
+                            edit
+                        </span>
+                        <p class="btn-caption">edit title</p>
+                    </button>
+                </div>
+
+                <ul class="note-list">
+                   
+                </ul>
+                
+            </aside>
+
+            <article class="note-container">
+                <header>
+                    <h1>MemoryPad</h1>       
+                </header>
+
+                <dialog class="modal-choose-title" open>
+                    
+                    <form>
+                        <label for="title"></label>
+                        <input type="text" id="title" name="title">
+                        <div class="dialog-btn-container">
+                            <button class="btn-continue" type="submit">
+                                Continue
+                            </button>
+                            <button class="btn-cancel">
+                                cancel
+                            </button>
+                        </div>
+                    </form>
+
+                </dialog>
+
+                <textarea class="user-note-input" placeholder="Write Here..."></textarea>
+            </article>
+        </section>
+    </main>
+    <script src="js/notepad.js"></script>
+</body>
+</html>

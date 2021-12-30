@@ -1,0 +1,194 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+body ::-webkit-scrollbar {
+  display: none;
+}
+
+.notepad-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+}
+.notepad-container .note-list-block {
+  width: 30%;
+  height: 100vh;
+  background-color: #2d333b;
+  border-right: 1px double #474e57;
+  position: relative;
+}
+.notepad-container .note-list-block .list-top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #0a66c2;
+  width: 100%;
+  height: 70px;
+  position: absolute;
+}
+.notepad-container .note-list-block .list-top-bar button {
+  border: none;
+  background: none;
+  color: #cdd9e5;
+  cursor: pointer;
+}
+.notepad-container .note-list-block .list-top-bar button span {
+  font-size: 3em;
+  transition-duration: 500ms;
+}
+.notepad-container .note-list-block .list-top-bar button span:hover {
+  color: #acb6c0;
+}
+.notepad-container .note-list-block .list-top-bar .btn-delete:hover span {
+  color: #dc3545;
+}
+.notepad-container .note-list-block .note-list {
+  max-height: 94.5vh;
+  margin-top: 75px;
+  overflow: scroll;
+}
+.notepad-container .note-list-block .note-list li {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #0a66c2;
+  margin-bottom: 5px;
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+.notepad-container .note-list-block .note-list li p, .notepad-container .note-list-block .note-list li h2 {
+  color: #cdd9e5;
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+}
+.notepad-container .note-list-block .note-list li .list-title {
+  font-size: 2em;
+}
+.notepad-container .note-list-block .note-list li .caption {
+  font-size: 1em;
+  font-weight: lighter;
+}
+.notepad-container .note-list-block .note-list li:hover {
+  background-color: #075eb4;
+}
+.notepad-container .note-container {
+  width: 70%;
+  height: 100vh;
+  background-color: #2d333b;
+}
+.notepad-container .note-container header {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  height: 70px;
+  background-color: #0a66c2;
+  margin-bottom: 0.5vh;
+}
+.notepad-container .note-container header h1 {
+  text-align: center;
+  font-size: 3em;
+  color: #cdd9e5;
+  font-family: "Rubik", sans-serif;
+  letter-spacing: 1.5px;
+  padding-top: 5px;
+}
+.notepad-container .note-container .modal-choose-title {
+  position: relative;
+  z-index: 0;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.5%;
+  font-size: 1.5rem;
+  text-align: center;
+  border: none;
+  border-radius: 0.5em;
+  background-color: #545d68;
+  color: #cdd9e5;
+  padding-top: 5px;
+  left: 33%;
+  top: -600px;
+  transition-duration: 500ms;
+}
+.notepad-container .note-container .modal-choose-title label {
+  color: #ecf6ff;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+.notepad-container .note-container .modal-choose-title form input {
+  width: 95%;
+  height: 35px;
+  margin-top: 5px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 1em;
+}
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container button {
+  width: 40%;
+  border: none;
+  font-size: 0.8em;
+  color: #ecf6ff;
+  margin-top: 5px;
+  padding: 4px;
+  transition-duration: 400ms;
+  cursor: pointer;
+}
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-continue {
+  background-color: #28A745;
+}
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-continue:hover {
+  background-color: #2fc752;
+}
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-cancel {
+  background-color: #dc3545;
+}
+.notepad-container .note-container .modal-choose-title form .dialog-btn-container .btn-cancel:hover {
+  background-color: #f13b4d;
+}
+.notepad-container .note-container .user-note-input {
+  width: 96%;
+  height: 94vh;
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+  color: #cdd9e5;
+  font-size: 2em;
+  padding-left: 1em;
+  font-family: "Rubik", sans-serif;
+}
+.notepad-container .note-container ::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #cdd9e5;
+  text-align: center;
+  opacity: 1;
+  /* Firefox */
+}
+.notepad-container .note-container :-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #cdd9e5;
+}
+.notepad-container .note-container ::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #cdd9e5;
+}
+
+/*# sourceMappingURL=style.css.map */
