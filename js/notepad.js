@@ -43,31 +43,24 @@ function getLocalDate() {
 
 function setNewNote( title, note = '') {
   const localDate = getLocalDate();
-  nbOfNotes++;
-  const id        = nbOfNotes;
-  actualNoteId    = nbOfNotes;
-
-  console.log(id);
+  const id        = ++nbOfNotes;
+  actualNoteId    = id;
 
   userNotes.set( id ,{
     noteTitle: title,
     userNote: note,
     creationDate: localDate
   })
-
-  // console.log(userNotes.get(id));
-  
 }
 
-function showModal( yStart, yEnd, durationTime = 600 ) {
+function showModal( yStart, yEnd, durationTime = 650 ) {
     dialogTitle.animate([
         // keyframes
         { transform: `translateY(${yStart})` },
         { transform: `translateY(${yEnd})` }
       ], {
         // timing options
-        duration: durationTime,
-        // iterations: 1
+        duration: durationTime
         
       });
       dialogTitle.style.top = yEnd;
@@ -88,6 +81,8 @@ function addElementToList( noteId, noteTitle, noteDate ) {
 
   newElement.append( heading, caption );
   noteList.prepend( newElement );
+
+  changeListElementColor();
 }
 
 function removeNote( id ) {
@@ -107,9 +102,21 @@ function removeNote( id ) {
   }
 }
 
-function openNote( id ) {
+function changeListElementColor() {
+
+  const oldElementSelected = noteList.querySelector(`.note-selected`);
+
+  if ( oldElementSelected ) {
+    noteList.querySelector(`.note-selected`).className = '';
+  }
+  
+  noteList.querySelector(`#note${actualNoteId}`).className = 'note-selected';
+}
+
+function openNote( id ) { 
   actualNoteId        = id;
   title.textContent   = userNotes.get(actualNoteId)['noteTitle'];
+  console.log( title.textContent );
   userNoteInput.value = userNotes.get(actualNoteId)['userNote'];
 }
 
@@ -136,10 +143,11 @@ dialogForm.addEventListener('submit', (e) => {
     const titleToChange = targetElement.querySelector('.list-title');
 
     userNotes.set( actualNoteId, {
-      noteTitle: titleInput
+      noteTitle: titleInput,
+      userNote:  userNoteInput.value
     });
 
-    title.textContent   = titleInput;
+    title.textContent         = titleInput;
     titleToChange.textContent = titleInput;
 
     dialogForm.querySelector('input').value = '';
@@ -160,13 +168,15 @@ dialogForm.addEventListener('submit', (e) => {
     showModal('0px', '-600px');
 
     dialogForm.querySelector('input').value = '';
-
+    userNoteInput.value = '';
     userNoteInput.style.display = '';
   } 
 });
 
 dialogTitle.querySelector('.btn-cancel').addEventListener('click', () => {
+  dialogForm.querySelector('input').value = '';
   showModal('0px', '-600px');
+  e.preventDefault();
 });
 
 noteList.addEventListener( 'click', (e) => {
@@ -174,11 +184,13 @@ noteList.addEventListener( 'click', (e) => {
   if ( e.target.nodeName == 'LI' ) {
 
     openNote( Number( e.target.id.replace('note', '') ) );
+    changeListElementColor();
     userNoteInput.style.display = '';
 
   } else if ( e.target.parentElement.nodeName == 'LI' ) {
 
     openNote( Number( e.target.parentElement.id.replace('note', '') ) );
+    changeListElementColor();
     userNoteInput.style.display = '';
   }
   console.log( 'Log event note list Actual ID : ' + actualNoteId);
@@ -187,6 +199,7 @@ noteList.addEventListener( 'click', (e) => {
 userNoteInput.addEventListener('keyup', (e) => {
   
   userNotes.set( actualNoteId, {
+    noteTitle: title.textContent,
     userNote: userNoteInput.value
   })
 
