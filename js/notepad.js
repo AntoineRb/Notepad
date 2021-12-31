@@ -81,6 +81,8 @@ function addElementToList( noteId, noteTitle, noteDate ) {
 
   newElement.append( heading, caption );
   noteList.prepend( newElement );
+
+  changeListElementColor();
 }
 
 function removeNote( id ) {
@@ -100,7 +102,18 @@ function removeNote( id ) {
   }
 }
 
-function openNote( id ) {
+function changeListElementColor() {
+
+  const oldElementSelected = noteList.querySelector(`.note-selected`);
+
+  if ( oldElementSelected ) {
+    noteList.querySelector(`.note-selected`).className = '';
+  }
+  
+  noteList.querySelector(`#note${actualNoteId}`).className = 'note-selected';
+}
+
+function openNote( id ) { 
   actualNoteId        = id;
   title.textContent   = userNotes.get(actualNoteId)['noteTitle'];
   console.log( title.textContent );
@@ -161,7 +174,9 @@ dialogForm.addEventListener('submit', (e) => {
 });
 
 dialogTitle.querySelector('.btn-cancel').addEventListener('click', () => {
+  dialogForm.querySelector('input').value = '';
   showModal('0px', '-600px');
+  e.preventDefault();
 });
 
 noteList.addEventListener( 'click', (e) => {
@@ -169,11 +184,13 @@ noteList.addEventListener( 'click', (e) => {
   if ( e.target.nodeName == 'LI' ) {
 
     openNote( Number( e.target.id.replace('note', '') ) );
+    changeListElementColor();
     userNoteInput.style.display = '';
 
   } else if ( e.target.parentElement.nodeName == 'LI' ) {
 
     openNote( Number( e.target.parentElement.id.replace('note', '') ) );
+    changeListElementColor();
     userNoteInput.style.display = '';
   }
   console.log( 'Log event note list Actual ID : ' + actualNoteId);

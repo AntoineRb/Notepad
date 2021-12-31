@@ -55,19 +55,26 @@ body ::-webkit-scrollbar {
   max-height: 94.5vh;
   margin-top: 75px;
   overflow: scroll;
+  list-style: none;
 }
 .notepad-container .note-list-block .note-list li {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  width: 90%;
+  margin: auto;
+  margin-top: 1.5%;
+  padding-top: 2em;
+  padding-bottom: 2em;
   background-color: #0a66c2;
+  border-right: 1px solid #474e57;
   margin-bottom: 5px;
-  transition-duration: 500ms;
+  border-radius: 1em;
+  transition-duration: 400ms;
   cursor: pointer;
 }
 .notepad-container .note-list-block .note-list li p, .notepad-container .note-list-block .note-list li h2 {
   color: #cdd9e5;
   text-align: center;
   font-family: "Rubik", sans-serif;
+  padding-bottom: 0.5em;
 }
 .notepad-container .note-list-block .note-list li .list-title {
   font-size: 2em;
@@ -78,6 +85,12 @@ body ::-webkit-scrollbar {
 }
 .notepad-container .note-list-block .note-list li:hover {
   background-color: #075eb4;
+}
+.notepad-container .note-list-block .note-list .note-selected {
+  background-color: #7e00d8;
+}
+.notepad-container .note-list-block .note-list .note-selected:hover {
+  background-color: #7102c0;
 }
 .notepad-container .note-container {
   width: 70%;
@@ -176,18 +189,14 @@ body ::-webkit-scrollbar {
   font-family: "Rubik", sans-serif;
 }
 .notepad-container .note-container ::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #cdd9e5;
   text-align: center;
   opacity: 1;
-  /* Firefox */
 }
 .notepad-container .note-container :-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
   color: #cdd9e5;
 }
 .notepad-container .note-container ::-ms-input-placeholder {
-  /* Microsoft Edge */
   color: #cdd9e5;
 }
 

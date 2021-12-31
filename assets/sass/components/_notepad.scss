@@ -14,6 +14,7 @@
         border-right: 1px double #474e57;
         position: relative;
 
+
         .list-top-bar {
             display: flex;
             flex-direction: row;
@@ -21,7 +22,6 @@
             background-color: #0a66c2;
             width: 100%;
             height: 70px;
-            // height: 5vh;
             position: absolute;
 
             button {
@@ -46,20 +46,30 @@
         }
         
         .note-list {
+
             max-height: 94.5vh;
             margin-top: 75px;
             overflow: scroll;
+            list-style: none;
+
             li {
-                padding-top: 20px;
-                padding-bottom: 20px;
+                width: 90%;
+                margin: auto;
+                margin-top: 1.5%;
+                padding-top:    2em;
+                padding-bottom: 2em;
                 background-color: #0a66c2;
+                border-right: 1px solid #474e57;
                 margin-bottom: 5px;
-                transition-duration: 500ms;
+
+                border-radius: 1em;
+                transition-duration: 400ms;
                 cursor: pointer;
                 p, h2 {
                     color: #cdd9e5;       
                     text-align: center;
                     font-family: 'Rubik', sans-serif;
+                    padding-bottom: 0.5em;
                 }
                 .list-title {
                     font-size: 2em;
@@ -71,6 +81,12 @@
             }
             li:hover {
                 background-color: #075eb4;
+            }
+            .note-selected {
+                background-color: rgb(126, 0, 216);
+            }
+            .note-selected:hover {
+                background-color: rgb(113, 2, 192);
             }
             
         }
@@ -189,17 +205,17 @@
             font-family: 'Rubik', sans-serif;
             
         }
-        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        ::placeholder { // Chrome, Firefox, Opera, Safari 10.1+ 
             color: #cdd9e5;
             text-align: center;
-            opacity: 1; /* Firefox */
+            opacity: 1; // Firefox 
           }
           
-          :-ms-input-placeholder { /* Internet Explorer 10-11 */
+          :-ms-input-placeholder { // Internet Explorer 10-11 
             color: #cdd9e5;
           }
           
-          ::-ms-input-placeholder { /* Microsoft Edge */
+          ::-ms-input-placeholder { // Microsoft Edge 
             color: #cdd9e5;
           }
     }
