@@ -43,31 +43,24 @@ function getLocalDate() {
 
 function setNewNote( title, note = '') {
   const localDate = getLocalDate();
-  nbOfNotes++;
-  const id        = nbOfNotes;
-  actualNoteId    = nbOfNotes;
-
-  console.log(id);
+  const id        = ++nbOfNotes;
+  actualNoteId    = id;
 
   userNotes.set( id ,{
     noteTitle: title,
     userNote: note,
     creationDate: localDate
   })
-
-  // console.log(userNotes.get(id));
-  
 }
 
-function showModal( yStart, yEnd, durationTime = 600 ) {
+function showModal( yStart, yEnd, durationTime = 650 ) {
     dialogTitle.animate([
         // keyframes
         { transform: `translateY(${yStart})` },
         { transform: `translateY(${yEnd})` }
       ], {
         // timing options
-        duration: durationTime,
-        // iterations: 1
+        duration: durationTime
         
       });
       dialogTitle.style.top = yEnd;
@@ -110,6 +103,7 @@ function removeNote( id ) {
 function openNote( id ) {
   actualNoteId        = id;
   title.textContent   = userNotes.get(actualNoteId)['noteTitle'];
+  console.log( title.textContent );
   userNoteInput.value = userNotes.get(actualNoteId)['userNote'];
 }
 
@@ -136,10 +130,11 @@ dialogForm.addEventListener('submit', (e) => {
     const titleToChange = targetElement.querySelector('.list-title');
 
     userNotes.set( actualNoteId, {
-      noteTitle: titleInput
+      noteTitle: titleInput,
+      userNote:  userNoteInput.value
     });
 
-    title.textContent   = titleInput;
+    title.textContent         = titleInput;
     titleToChange.textContent = titleInput;
 
     dialogForm.querySelector('input').value = '';
@@ -187,6 +182,7 @@ noteList.addEventListener( 'click', (e) => {
 userNoteInput.addEventListener('keyup', (e) => {
   
   userNotes.set( actualNoteId, {
+    noteTitle: title.textContent,
     userNote: userNoteInput.value
   })
 
