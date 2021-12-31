@@ -155,7 +155,7 @@ dialogForm.addEventListener('submit', (e) => {
     showModal('0px', '-600px');
 
     dialogForm.querySelector('input').value = '';
-
+    userNoteInput.value = '';
     userNoteInput.style.display = '';
   } 
 });
