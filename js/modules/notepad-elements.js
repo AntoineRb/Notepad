@@ -1,3 +1,4 @@
+// Notepad container
 export const notePadContainer = document.querySelector( '.notepad-container' );
 
 // Aside
@@ -14,5 +15,6 @@ export const noteContainer = notePadContainer.querySelector( '.note-container' )
 export const title         = noteContainer.querySelector('header').querySelector('h1');
 export const userNoteInput = noteContainer.querySelector('.user-note-input');
 
+// Modal create new note & edit
 export const dialogTitle   = noteContainer.querySelector('.modal-choose-title');
 export const dialogForm    = dialogTitle.querySelector('form');

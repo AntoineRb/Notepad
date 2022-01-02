@@ -2,15 +2,18 @@ import * as  elem  from './modules/notepad-elements.js';
 import * as  utils from './modules/notepad-utils.js';
 
 
+
 // Change the visibility of the textarea
 elem.userNoteInput.style.display = 'none';
 
 elem.btnAdd.addEventListener('click', (e) => {
 
-  elem.dialogForm.querySelector('label').textContent = 'Set a title :';
-  elem.dialogTitle.id = 'set-title'; // To know if the event set a title or event update a title
+  if ( !(elem.dialogTitle.style.top == '0px') ) {
+    elem.dialogForm.querySelector('label').textContent = 'Set a title :';
+    elem.dialogTitle.id = 'set-title'; // To know if the event set a title or event update a title
 
-  utils.showModal('-600px', '0px');     
+    utils.showModal('-600px', '0px'); 
+  }
 });
 
 elem.dialogForm.addEventListener('submit', (e) => {
@@ -20,8 +23,8 @@ elem.dialogForm.addEventListener('submit', (e) => {
   let dialogId      = elem.dialogTitle.id;
 
   if ( dialogId == 'update-title' &&  titleInput.length > 0) { // Update title
-    const noteId = utils.actualNoteId;
-    const targetElement = document.querySelector(`#note${noteId}`);
+    
+    const targetElement = document.querySelector(`#note${utils.actualNoteId}`);
     const titleToChange = targetElement.querySelector('.list-title');
 
     utils.userNotes.set( utils.actualNoteId, {
@@ -94,11 +97,11 @@ elem.userNoteInput.addEventListener('keydown', (e) => {
 
 elem.btnEdit.addEventListener( 'click', () => {
 
-  if ( !(utils.nbOfNotes == 0) ) {
-    elem.dialogForm.querySelector('label').textContent = 'Set a new title :';
-    elem.dialogTitle.id = 'update-title';
-    utils.showModal('-600px', '0px');
-  }
+  if ( !(elem.dialogTitle.style.top == '0px') && !(utils.nbOfNotes == 0)) {
+      elem.dialogForm.querySelector('label').textContent = 'Set a new title :';
+      elem.dialogTitle.id = 'update-title';
+      utils.showModal('-600px', '0px');
+  } 
 });
 
 elem.btnDelete.addEventListener( 'click', () => {
