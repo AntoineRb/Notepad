@@ -116,11 +116,11 @@ body ::-webkit-scrollbar {
 .notepad-container .note-container .modal-choose-title {
   position: relative;
   z-index: 0;
-  width: 35%;
+  width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 0.5%;
+  padding: 1%;
   font-size: 1.5rem;
   text-align: center;
   border: none;
@@ -128,7 +128,7 @@ body ::-webkit-scrollbar {
   background-color: #545d68;
   color: #cdd9e5;
   padding-top: 5px;
-  left: 33%;
+  margin: auto;
   top: -600px;
   transition-duration: 500ms;
 }
@@ -152,7 +152,7 @@ body ::-webkit-scrollbar {
   align-items: center;
 }
 .notepad-container .note-container .modal-choose-title form .dialog-btn-container button {
-  width: 40%;
+  width: 95%;
   border: none;
   font-size: 0.8em;
   color: #ecf6ff;
